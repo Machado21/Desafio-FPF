@@ -23,20 +23,18 @@
                 <h1>Comandos</h1>
             </div>
             <div class="game__commands-list">
-                <ul>
-                    <li class="item" (click)="attack()">
-                        <h2>Ataque</h2>
-                    </li>
-                    <li [ngClass]='specialState' (click)="specialAttack()">
-                        <h2>Ataque Especial</h2>
-                    </li>
-                    <li class="item" (click)="healing()">
-                        <h2>Curar</h2>
-                    </li>
-                    <li class="item" (click)="giveUp()">
-                        <h2>Desistir</h2>
-                    </li>
-                </ul>
+                <button class="item" (click)="attack()">
+                    <h2>Ataque</h2>
+                </button>
+                <button class="item" [disabled]="specialState" (click)="specialAttack()">
+                    <h2>Ataque Especial</h2>
+                </button>
+                <button class="item" (click)="healing()">
+                    <h2>Curar</h2>
+                </button>
+                <button class="item" (click)="giveUp()">
+                    <h2>Desistir</h2>
+                </button>
             </div>
         </div>
     </section>
@@ -57,3 +55,5 @@
 
 
 </div>
+
+<ng-template #endGame> </ng-template>

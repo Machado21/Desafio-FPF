@@ -15,7 +15,7 @@ export class GameComponent implements OnInit {
 
   player: number;
   attackSpecial: number;
-  specialState: string;
+  specialState: boolean;
   monster: number;
 
   playerLife: String;
@@ -31,8 +31,8 @@ export class GameComponent implements OnInit {
     this.endGame = false;
 
     this.player = 100;
-    this.attackSpecial = 2;
-    this.specialState = 'item__disabled';
+    this.attackSpecial = 0;
+    this.specialState = false; //TODO transformar em disabled
     this.monster = 100;
 
     this.playerLife = this.player + '%';
@@ -94,7 +94,7 @@ export class GameComponent implements OnInit {
       this.monsterLife = this.monster + '%';
       this.monsterAttack();
       this.attackSpecial += 2;
-      this.specialState = 'item__disabled';
+      this.specialState = true;
       this.stum = false;
     }
   }
@@ -164,8 +164,8 @@ export class GameComponent implements OnInit {
     this.playerLife = this.player + '%';
     this.attackSpecial == 0 ? this.attackSpecial : this.attackSpecial--;
     this.attackSpecial == 0
-      ? (this.specialState = 'item')
-      : (this.specialState = 'item__disabled');
+      ? (this.specialState = false)
+      : (this.specialState = true);
     this.lifeBar();
     this.turn++;
   }
@@ -184,11 +184,18 @@ export class GameComponent implements OnInit {
   win() {
     this.endGame = true;
     this.addLog(this.turn, 'player', 'Jogador - Venceu!');
+
+    //TODO Calcular pontuação e chamar tela de vitória
   }
 
   lose() {
     this.endGame = true;
     this.addLog(this.turn, 'monster', 'Monstro - Venceu!');
+  }
+
+  points() {
+    var result: number = (this.player * 1000) / this.turn;
+    return result;
   }
 
   addLog(turn: number, person: string, mensage: string) {
